@@ -45,7 +45,7 @@ export default {
 
   font-size: 30px;
   background-color: #f7f7f7;
-  opacity: .8;
+  opacity: .9;
   .footerItem {
     flex-grow: 1;
 

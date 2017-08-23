@@ -1,5 +1,5 @@
 <template>
-  <div class="list">
+  <div class="list" v-scroll="getList">
     <list-item v-for="item in this.list" :data="item" :key="item.id"></list-item>
   </div>
 </template>
@@ -16,7 +16,8 @@ export default {
     return {
       start: 0,
       count: 10,
-      list: []
+      list: [],
+      isLoading: false
     }
   },
   methods: {
@@ -30,6 +31,19 @@ export default {
       })
     }
   },
+  directives: {
+    scroll: {
+      bind(el, binding) {
+        window.addEventListener('scroll', () => {
+          if (document.body.scrollTop + window.innerHeight >= el.clientHeight) {
+            console.log(this)
+            let fn = binding.value
+            fn()
+          }
+        })
+      }
+    }
+  },
   mounted() {
     this.getList()
   }
@@ -37,5 +51,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.list {
+  background-image: url('/static/img/background.jpg');
+}
 </style>
